@@ -1,4 +1,5 @@
-import 'package:coding_game/providers/team_names_provider.dart';
+import 'package:coding_game/providers/selected_team.dart';
+import 'package:coding_game/providers/temprary_teams.dart';
 import 'package:coding_game/viewModel/auth/sign_in.dart';
 import 'package:coding_game/providers/topic_name_provider.dart';
 import 'package:coding_game/viewModel/auth/sign_up_provider.dart';
@@ -23,9 +24,10 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => SignUpProvider()),
         ChangeNotifierProvider(create: (_) => SingnInProvider()),
-        ChangeNotifierProvider(create: (_) => TeamNamesProvider()),
+        ChangeNotifierProvider(create: (_) => TemporaryTeamsProvider()),
         ChangeNotifierProvider(create: (_) => TopicNameProvider()),
         ChangeNotifierProvider(create: (_) => GetQuizDbProvider()),
+        ChangeNotifierProvider(create: (_) => SelectedTeamProvider()),
       ],
       child: CodingGame(),
     ),

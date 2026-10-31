@@ -1,3 +1,4 @@
+import 'package:coding_game/providers/selected_team.dart';
 import 'package:coding_game/views/home/clock_timer.dart';
 import 'package:coding_game/views/home/code_snippet.dart';
 import 'package:coding_game/views/home/home_image_page.dart';
@@ -6,6 +7,7 @@ import 'package:coding_game/views/home/scrollable.dart';
 import 'package:coding_game/views/onboarding/topics/add_teams.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +19,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    SelectedTeamProvider selectedTeamProvider = context
+        .watch<SelectedTeamProvider>();
     return Scaffold(
       body: HomeImagePage(
         child: SingleChildScrollView(
@@ -43,7 +47,7 @@ class _HomeState extends State<Home> {
                       child: Row(
                         children: [
                           Text(
-                            'TEAM NAME',
+                            selectedTeamProvider.selectedTeamName,
                             style: TextStyle(
                               fontFamily: 'JetBrainsMono',
                               color: Colors.white,
@@ -81,5 +85,5 @@ class _HomeState extends State<Home> {
     );
   }
 
-  //load 
+  //load
 }

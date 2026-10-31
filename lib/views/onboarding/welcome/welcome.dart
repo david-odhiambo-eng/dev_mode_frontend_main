@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:coding_game/views/home/home_image_page.dart';
+import 'package:coding_game/views/onboarding/topics/add_teams.dart';
 import 'package:coding_game/views/onboarding/topics/topics_page.dart';
 import 'package:coding_game/views/reusables/type_text.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +109,7 @@ def hello():
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => TopicsPage()),
+                        MaterialPageRoute(builder: (context) => AddTeams()),
                       );
                     },
                     child: Text(

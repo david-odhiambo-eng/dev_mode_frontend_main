@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class TeamNamesProvider extends ChangeNotifier {
+class TemporaryTeamsProvider extends ChangeNotifier {
   List<String> teamNames = [];
 
   void addTeam({required String teamName}) {

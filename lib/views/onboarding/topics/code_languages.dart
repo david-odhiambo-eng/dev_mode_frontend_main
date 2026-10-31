@@ -1,5 +1,6 @@
 import 'package:coding_game/providers/topic_name_provider.dart';
 import 'package:coding_game/viewModel/get_quiz.dart';
+import 'package:coding_game/views/home/home.dart';
 
 import 'package:coding_game/views/home/home_image_page.dart';
 import 'package:coding_game/views/onboarding/topics/add_teams.dart';
@@ -248,7 +249,7 @@ class _CodeLanguagesState extends State<CodeLanguages> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => AddTeams(),
+                                          builder: (context) => Home(),
                                         ),
                                       );
                                     } else if (getQuizDbProvider.errorMessage !=
