@@ -1,4 +1,9 @@
+import 'package:coding_game/model/get_quiz.dart';
+import 'package:coding_game/providers/quiz_index.dart';
+import 'package:coding_game/providers/selected_team.dart';
+import 'package:coding_game/providers/team_quiz.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CodeSnippet extends StatefulWidget {
   const CodeSnippet({super.key});
@@ -8,13 +13,23 @@ class CodeSnippet extends StatefulWidget {
 }
 
 class _CodeSnippetState extends State<CodeSnippet> {
-  String language = 'dart';
-  String keyword = 'word to describe appears here';
-  String answer = 'Answers only appear after\nround ends';
-  String code = 'Questions from selected topics\n\nwill appear here once you press\n\n              GO';
-
   @override
   Widget build(BuildContext context) {
+    String selectedTeamName = context
+        .watch<SelectedTeamProvider>()
+        .selectedTeamName;
+    Map<String, List<GetQuizData>?> teamData = context
+        .watch<TeamQuizProvider>()
+        .teamData;
+    List<GetQuizData>? questions = teamData[selectedTeamName];
+    int quizIndex = context.watch<QuizIndexProvider>().quizIndex;
+    GetQuizData? quiz;
+    if (questions != null &&
+        questions.isNotEmpty &&
+        quizIndex >= 0 &&
+        quizIndex < questions.length) {
+      quiz = questions[quizIndex];
+    }
     return Container(
       height: MediaQuery.of(context).size.height * 0.4,
       width: double.infinity,
@@ -52,7 +67,7 @@ class _CodeSnippetState extends State<CodeSnippet> {
                 _showDottedColors(color: Colors.green),
                 const Spacer(),
                 Text(
-                  language.toUpperCase(),
+                  quiz?.quizTopic ?? 'topic',
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.55),
                     fontSize: 11,
@@ -74,7 +89,7 @@ class _CodeSnippetState extends State<CodeSnippet> {
               child: SingleChildScrollView(
                 child: Center(
                   child: Text(
-                    code,
+                    quiz?.quiz ?? 'No questions under\nselected topics\nTry selecting other topics',
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'JetBrainsMono',
@@ -88,13 +103,13 @@ class _CodeSnippetState extends State<CodeSnippet> {
           _showKeyWordAndAnswer(
             topic: 'Keyword:',
             topicValueColor: Colors.red,
-            topicValue: keyword,
+            topicValue: quiz?.keyWord ?? 'word to describe will show here',
           ),
 
           _showKeyWordAndAnswer(
             topic: 'Answer:',
             topicValueColor: Colors.green,
-            topicValue: answer,
+            topicValue: quiz?.answer ?? '',
             visibility: IconButton(
               onPressed: () {},
               icon: Icon(Icons.visibility_off),
@@ -122,24 +137,32 @@ class _CodeSnippetState extends State<CodeSnippet> {
     Widget? visibility,
   }) {
     return Padding(
-      padding: EdgeInsets.only(left: 6),
+      padding: const EdgeInsets.only(left: 6),
       child: Row(
         children: [
           Text(
             topic,
-            style: TextStyle(fontFamily: 'JetBrainsMono', color: Colors.white),
+            style: const TextStyle(
+              fontFamily: 'JetBrainsMono',
+              color: Colors.white,
+            ),
           ),
-          Padding(
-            padding: EdgeInsets.all(12),
-            child: Text(
-              topicValue,
-              style: TextStyle(
-                fontFamily: 'JetBrainsMono',
-                color: topicValueColor,
+
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                topicValue,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 5,
+                style: TextStyle(
+                  fontFamily: 'JetBrainsMono',
+                  color: topicValueColor,
+                ),
               ),
             ),
           ),
-          Spacer(),
+
           ?visibility,
         ],
       ),

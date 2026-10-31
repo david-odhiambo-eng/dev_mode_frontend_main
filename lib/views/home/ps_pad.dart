@@ -1,4 +1,9 @@
+import 'package:coding_game/model/get_quiz.dart';
+import 'package:coding_game/providers/quiz_index.dart';
+import 'package:coding_game/providers/selected_team.dart';
+import 'package:coding_game/providers/team_quiz.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PsPad extends StatelessWidget {
   const PsPad({super.key});
@@ -9,6 +14,14 @@ class PsPad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    QuizIndexProvider quizIndexProvider = context.read<QuizIndexProvider>();
+    String selectedTeamName = context
+        .watch<SelectedTeamProvider>()
+        .selectedTeamName;
+    Map<String, List<GetQuizData>?> teamData = context
+        .watch<TeamQuizProvider>()
+        .teamData;
+    List<GetQuizData>? questions = teamData[selectedTeamName];
     return AspectRatio(
       aspectRatio: imageAspectRatio,
       child: LayoutBuilder(
@@ -33,9 +46,11 @@ class PsPad extends StatelessWidget {
                 left: px(258),
                 child: _button(
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      quizIndexProvider.addQuizIndex(questions: questions);
+                    },
                     icon: const Icon(
-                      Icons.arrow_forward_rounded,
+                      Icons.arrow_forward_ios_rounded,
                       color: Colors.white,
                     ),
                   ),
@@ -47,7 +62,9 @@ class PsPad extends StatelessWidget {
                 right: px(255),
                 child: _button(
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      quizIndexProvider.subtractQuizIndex(questions: questions);
+                    },
                     icon: const Icon(
                       Icons.arrow_back_ios_rounded,
                       color: Colors.white,
@@ -62,10 +79,7 @@ class PsPad extends StatelessWidget {
                 child: _button(
                   child: IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.remove,
-                      color: Colors.red,
-                    ),
+                    icon: const Icon(Icons.remove, color: Colors.red),
                   ),
                 ),
               ),
@@ -76,10 +90,7 @@ class PsPad extends StatelessWidget {
                 child: _button(
                   child: IconButton(
                     onPressed: () {},
-                    icon: const Icon(
-                      Icons.add,
-                      color: Colors.green,
-                    ),
+                    icon: const Icon(Icons.add, color: Colors.green),
                   ),
                 ),
               ),

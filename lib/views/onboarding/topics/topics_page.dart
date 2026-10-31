@@ -1,10 +1,8 @@
 import 'package:coding_game/views/home/home_image_page.dart';
 import 'package:coding_game/views/onboarding/topics/icons_page.dart';
-import 'package:coding_game/views/onboarding/topics/add_teams.dart';
 
 import 'package:coding_game/views/onboarding/topics/dev_greeting.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TopicsPage extends StatefulWidget {
   const TopicsPage({super.key});
@@ -23,7 +21,7 @@ class _TopicsPageState extends State<TopicsPage> {
           child: SafeArea(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 18, 20, 18),
-              
+
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

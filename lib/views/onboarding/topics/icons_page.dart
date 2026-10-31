@@ -37,7 +37,9 @@ class _IconsPageState extends State<IconsPage> {
                 isAiSelected = !isAiSelected;
               });
               isAiSelected ? _increaseTopicCount() : _decreaseTopicCount();
-              topicNameProvider.addTopicNames(topicName: 'AI');
+              isAiSelected
+                  ? topicNameProvider.addTopicNames(topicName: 'AI')
+                  : topicNameProvider.deleteTopicName(topicName: 'AI');
             },
           ),
 
@@ -53,7 +55,9 @@ class _IconsPageState extends State<IconsPage> {
                 isMlSelected = !isMlSelected;
               });
               isMlSelected ? _increaseTopicCount() : _decreaseTopicCount();
-              topicNameProvider.addTopicNames(topicName: 'ML');
+              isMlSelected
+                  ? topicNameProvider.addTopicNames(topicName: 'ML')
+                  : topicNameProvider.deleteTopicName(topicName: 'ML');
             },
           ),
 
@@ -69,7 +73,9 @@ class _IconsPageState extends State<IconsPage> {
                 isDockerSelected = !isDockerSelected;
               });
               isDockerSelected ? _increaseTopicCount() : _decreaseTopicCount();
-              topicNameProvider.addTopicNames(topicName: 'Docker');
+              isDockerSelected
+                  ? topicNameProvider.addTopicNames(topicName: 'Docker')
+                  : topicNameProvider.deleteTopicName(topicName: 'Docker');
             },
           ),
 
@@ -87,7 +93,9 @@ class _IconsPageState extends State<IconsPage> {
               isDatabaseSelected
                   ? _increaseTopicCount()
                   : _decreaseTopicCount();
-              topicNameProvider.addTopicNames(topicName: 'Database');
+              isDatabaseSelected
+                  ? topicNameProvider.addTopicNames(topicName: 'Database')
+                  : topicNameProvider.deleteTopicName(topicName: 'Database');
             },
           ),
 
@@ -104,7 +112,9 @@ class _IconsPageState extends State<IconsPage> {
                 isDsaSelected = !isDsaSelected;
               });
               isDsaSelected ? _increaseTopicCount() : _decreaseTopicCount();
-              topicNameProvider.addTopicNames(topicName: 'DSA');
+              isDsaSelected
+                  ? topicNameProvider.addTopicNames(topicName: 'DSA')
+                  : topicNameProvider.deleteTopicName(topicName: 'DSA');
             },
           ),
 
@@ -120,7 +130,9 @@ class _IconsPageState extends State<IconsPage> {
                 isGitSelected = !isGitSelected;
               });
               isGitSelected ? _increaseTopicCount() : _decreaseTopicCount();
-              topicNameProvider.addTopicNames(topicName: 'Git');
+              isGitSelected
+                  ? topicNameProvider.addTopicNames(topicName: 'Git')
+                  : topicNameProvider.deleteTopicName(topicName: 'Git');
             },
           ),
 
@@ -136,7 +148,9 @@ class _IconsPageState extends State<IconsPage> {
                 isServerSelected = !isServerSelected;
               });
               isServerSelected ? _increaseTopicCount() : _decreaseTopicCount();
-              topicNameProvider.addTopicNames(topicName: 'Backend');
+              isServerSelected
+                  ? topicNameProvider.addTopicNames(topicName: 'Backend')
+                  : topicNameProvider.deleteTopicName(topicName: 'Backend');
             },
           ),
 
@@ -153,7 +167,9 @@ class _IconsPageState extends State<IconsPage> {
                 isCodeSelected = !isCodeSelected;
               });
               isCodeSelected ? _increaseTopicCount() : _decreaseTopicCount();
-              topicNameProvider.addTopicNames(topicName: 'Code');
+              isCodeSelected
+                  ? topicNameProvider.addTopicNames(topicName: 'Code')
+                  : topicNameProvider.deleteTopicName(topicName: 'Code');
             },
           ),
 
@@ -169,7 +185,9 @@ class _IconsPageState extends State<IconsPage> {
               setState(() {
                 isWebSelected = !isWebSelected;
                 isWebSelected ? _increaseTopicCount() : _decreaseTopicCount();
-                topicNameProvider.addTopicNames(topicName: 'Web');
+                isWebSelected
+                    ? topicNameProvider.addTopicNames(topicName: 'Web')
+                    : topicNameProvider.deleteTopicName(topicName: 'Web');
               });
             },
           ),
@@ -199,6 +217,7 @@ class _IconsPageState extends State<IconsPage> {
                           builder: (context) => CodeLanguages(),
                         ),
                       );
+                      
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.min,

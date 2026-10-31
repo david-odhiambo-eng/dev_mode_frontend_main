@@ -5,6 +5,19 @@ class TopicNameProvider extends ChangeNotifier {
 
   void addTopicNames({required String topicName}) {
     topicNames.add(topicName.toLowerCase());
+    print('TOPICS SELECTED ARE: ... $topicNames');
+    notifyListeners();
+  }
+
+  void deleteTopicName({required String topicName}) {
+    topicNames.remove(topicName.toLowerCase());
+    print('TOPICS SELECTED ARE: ... $topicNames');
+    notifyListeners();
+  }
+
+  void clearAllTopicNames() {
+    topicNames.clear();
+    print('TOPICS SELECTED ARE: ... $topicNames');
     notifyListeners();
   }
 }
